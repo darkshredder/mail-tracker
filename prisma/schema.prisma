@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.sqlite3"
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  refreshToken String
+  token String
+}
+
+model SentEmailStat {
+  id    Int     @id @default(autoincrement())
+  userId Int 
+  emailToken String
+}
+
+model SentEmailStatWithTimeStamp {
+  id    Int     @id @default(autoincrement())
+  emailToken String
+  createdAt DateTime @default(now())
+}

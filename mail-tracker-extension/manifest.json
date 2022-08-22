@@ -1,0 +1,52 @@
+{
+  "name": "Gmail Tracker",
+  "description": "Gmail Tracker is a Chrome extension that tracks your Gmail inbox.",
+  "version": "1.0.1",
+  "manifest_version": 3,
+  "permissions": ["storage", "webNavigation", "contextMenus"],
+  "host_permissions": ["https://mail.google.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["*://mail.google.com/*"],
+      "js": ["src/extensionInjector.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "externally_connectable": {
+    "matches": ["https://mail.google.com/*"]
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAisSasg2NGLaIpwnMGCYro+NANYpVm6KUTOvQkNkA/qxlzumwyQTMloYzu5bdL1N1COt6lSsmcMz1hw4KIILijNEm17qLz4nN9Su9lVKYnx0R1CcyqfCijZ2BGtapBfE/w1/6sG2JdaAcsLa1qB13ZaF+ZCA7gVBz8aY0ZsXG6GvZQnUjHOLbG39dYcXmVAgOw5VSS4HTtchuwBv0kCMMnPl0YUTiOWwmXRG03FtyWPlZFOnYr4qW6VsdziEUUyne3gaj/o5J2fnBlmcV334rUTZbJ+h/XdhytZaaXjQSPGNEfLXvOQ8iTYPupgcsDkgUBBSgSyI0t0R1CivmmL1ppwIDAQAB",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "/images/icon_16.png",
+      "48": "/images/icon_48.png"
+    }
+  },
+  "options_page": "auth.html",
+  "icons": {
+    "16": "/images/icon_16.png",
+    "48": "/images/icon_48.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "jquerydiff.min.js",
+        "gmail.js",
+        "content.js",
+        "main.js",
+        "auth.html",
+        "auth.js",
+        "dist/gmailJsLoader.js",
+        "dist/extension.js"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
